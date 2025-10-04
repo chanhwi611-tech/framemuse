@@ -14,8 +14,8 @@ import ActiveProjects from "./ActiveProjects";
 import CreateProjectModal from "./CreateProjectModal";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import "../styles/dashboard.scss";
-import colabFolder from "../assets/colab-logo.png";
-import colabTextTransparent from "../assets/colab-text-transparent.png";
+import framemuseFolder from "../assets/framemuse-logo.png";
+import framemuseTextTransparent from "../assets/framemuse-text-transparent.png";
 import useFetchUserAndProjects from "../hooks/useFetchUserAndProjects";
 
 const BUTTON_WRAPPER_STYLES = {
@@ -59,14 +59,14 @@ const Dashboard = () => {
           <Link to="/register" className="header-left links__link">
             <div className="logo-container">
               <img
-                src={colabFolder}
+                src={framemuseFolder}
                 alt="logo folder"
                 className="logo-container__logo logo-container__logo--co"
               />
               <img
-                src={colabTextTransparent}
+                src={framemuseTextTransparent}
                 alt="logo text"
-                className="logo-container__logo logo-container__logo--colab"
+                className="logo-container__logo logo-container__logo--framemuse"
               />
             </div>
           </Link>

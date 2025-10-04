@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import colab from "../assets/colab-text.png";
+import framemuse from "../assets/framemuse-text.png";
 import useAuth from "../hooks/useAuth";
 import "../styles/links.scss";
 import "../index.scss";
@@ -18,9 +18,9 @@ const Links = () => {
       <header className="header">
         <Link to="/" className="header-left links__link">
           <img
-            src={colab}
-            alt="colab text logo"
-            className="header-left colab-text-logo"
+            src={framemuse}
+            alt="framemuse text logo"
+            className="header-left framemuse-text-logo"
           />
         </Link>
         {/* <button

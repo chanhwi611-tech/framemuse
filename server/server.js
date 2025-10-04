@@ -118,7 +118,7 @@ const upload = multer({
 // Amazon S3 Bucket Middleware
 async function generateUploadURL() {
   const region = "us-west-2";
-  const bucketName = "colab-images";
+  const bucketName = "framemuse-images";
   const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
   const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY_ID;
 
@@ -196,7 +196,7 @@ app.post("/api/getimage", async (req, res) => {
 
 // Test Endpoint
 app.get("/", (req, res) => {
-  res.send("Welcome to CoLab's Backend.");
+  res.send("Welcome to framemuse's Backend.");
 });
 
 // ENDPOINT #1 - USER SIGNUP

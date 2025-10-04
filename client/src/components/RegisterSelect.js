@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import colabFolder from "../assets/colab-logo.png";
+import framemuseFolder from "../assets/framemuse-logo.png";
 
 const RegisterSelect = ({ handleShowForms }) => {
   return (
     <>
       <img
-        src={colabFolder}
-        alt="colab folder icon"
-        className="colab-folder-logo landing__folder-logo"
+        src={framemuseFolder}
+        alt="framemuse folder icon"
+        className="framemuse-folder-logo landing__folder-logo"
       />
       <h1 className="heading heading--largest">Let's Collaborate!</h1>
       <p className="landing__description">

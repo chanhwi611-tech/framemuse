@@ -1,4 +1,4 @@
-# CoLab
+# framemuse
 
 #### Allowing microinfluencers to work with brands to create a seamless workflow, including Campaign Creation, Submission Review, and Payment (Stripe)
 
