@@ -30,18 +30,20 @@ const crypto = require("crypto");
 const { promisify } = require("util");
 const randomBytes = promisify(crypto.randomBytes);
 const allowedOrigins = [
-  "https://framemuse-sand.vercel.app",
-  "http://localhost:3000",
+  "https://framemuse-sand.vercel.app", // Vercel 배포 주소
+  "http://localhost:3000",              // 로컬 개발용
 ];
 
-// CORS 전역 적용 (반드시 라우트 등록보다 위)
 app.use(
   cors({
-    origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // 서버-서버 통신 등 Origin 없는 요청 허용
-      return allowedOrigins.includes(origin)
-        ? cb(null, true)
-        : cb(new Error("Not allowed by CORS"));
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // 서버-서버 통신 허용
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.log("❌ CORS 차단됨:", origin);
+        return callback(new Error("Not allowed by CORS"));
+      }
     },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -49,7 +51,7 @@ app.use(
   })
 );
 
-// 프리플라이트(OPTIONS)도 처리
+// 프리플라이트(OPTIONS) 요청도 허용
 app.options("*", cors());
 
 // JSON 파서 (bodyParser 대신 express.json 권장)
