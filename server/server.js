@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
-const port = 5000;
+const port = process.env.PORT || 5000;
 const request = require("request");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -16,7 +16,7 @@ const bcrypt = require("bcryptjs"); //password hasher
 const jwt = require("jsonwebtoken");
 // Very sensitive - keep safe.
 const JWT_SECRET_KEY = "mv(3jfoa.@01va(Adup";
-const MONGOOSE_URL = "mongodb://127.0.0.1:27017/login-app-db";
+const MONGOOSE_URL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/login-app-db";
 const moment = require("moment");
 // Stripe
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
@@ -29,12 +29,31 @@ const aws = require("aws-sdk");
 const crypto = require("crypto");
 const { promisify } = require("util");
 const randomBytes = promisify(crypto.randomBytes);
+const allowedOrigins = [
+  "https://framemuse-sand.vercel.app",
+  "http://localhost:3000",
+];
+
+// CORS 전역 적용 (반드시 라우트 등록보다 위)
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: (origin, cb) => {
+      if (!origin) return cb(null, true); // 서버-서버 통신 등 Origin 없는 요청 허용
+      return allowedOrigins.includes(origin)
+        ? cb(null, true)
+        : cb(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+// 프리플라이트(OPTIONS)도 처리
+app.options("*", cors());
+
+// JSON 파서 (bodyParser 대신 express.json 권장)
+app.use(express.json());
 app.use(bodyParser.json());
 
 // test route for MVC architecture
